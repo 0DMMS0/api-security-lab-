@@ -1,15 +1,12 @@
 const express = require("express");
-
+const jwt = require("jsonwebtoken");
+const SECRET_KEY = "super-secret-key";
 const app = express();
-
+const authenticateToken = require("./middleware/auth");
 const PORT = 3001;
 
 
 // Usuario autenticado actualmente
-const currentUser = {
-    id: 100,
-    name: "Mauricio"
-};
 
 
 // Base de datos simulada
@@ -29,12 +26,30 @@ const orders = [
 ];
 
 
-app.get("/api/orders/:id",(req,res) => {
+app.post("/login", (req, res) => {
+    const user = {
+        id: 100,
+        name: "Mauricio"
+    };
+    const token = jwt.sign(
+        user,
+        SECRET_KEY,
+        {
+            expiresIn: "1h"
+        }
+    );
+
+
+    res.json({token});
+
+});
+
+app.get("/api/orders/:id",authenticateToken,(req,res) => {
     const orderId = Number(req.params.id);
 
     const foundOrder = orders.find(item =>
         item.id=== orderId && 
-        item.userId === currentUser.id
+        item.userId === req.user.id
     );
     if(!foundOrder){
         return res.status(403).json({
