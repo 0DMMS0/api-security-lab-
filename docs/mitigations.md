@@ -71,6 +71,26 @@ After five authentication attempts, the server returns:
 
 ---
 
+---
+
+## 4. JWT Authentication
+
+The application now uses JSON Web Tokens (JWT) to authenticate users after a successful login.
+
+Example:
+
+```javascript
+const token = jwt.sign(
+    {
+        id: user.id,
+        role: user.role
+    },
+    process.env.JWT_SECRET,
+    {
+        expiresIn: "15m"
+    }
+);
+
 ## 4. Generic Authentication Responses
 
 The application always returns the same response for failed authentication:

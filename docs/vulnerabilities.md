@@ -170,3 +170,26 @@ Successful exploitation may result in:
 - OWASP ASVS Authentication Verification Requirements
 - CWE-256 Plaintext Storage of Password
 - CWE-307 Improper Restriction of Excessive Authentication Attempts
+
+Successful exploitation may result in:
+
+- Unauthorized account access
+- Credential theft
+- Privilege escalation
+- Credential stuffing attacks
+- Data exposure
+- Unauthorized API access without proper authorization
+
+---
+
+### 5. Missing Authorization Controls
+
+Authentication alone does not verify what actions a user is allowed to perform.
+
+A valid authenticated user may access resources or perform actions beyond their permissions if authorization checks are missing.
+
+**Risk**
+
+- Privilege escalation
+- Unauthorized administrative actions
+- Sensitive data exposure
